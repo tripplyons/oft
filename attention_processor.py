@@ -5,7 +5,7 @@ import torch.nn as nn
 
 
 class OFTCrossAttnProcessor(nn.Module):
-    def __init__(self, hidden_size, r=8, constraint=3e-4):
+    def __init__(self, hidden_size, r=8, constraint=1e-3):
         super().__init__()
 
         self.hidden_size = hidden_size
@@ -13,7 +13,7 @@ class OFTCrossAttnProcessor(nn.Module):
         self.block_size = int(hidden_size / r)
         self.constraint = constraint * hidden_size
 
-        # block diagonals for the identity matrix
+        # block diagonals that turn into the identity matrix
         self.W_Q = nn.Parameter(torch.zeros(r, self.block_size, self.block_size))
         self.W_K = nn.Parameter(torch.zeros(r, self.block_size, self.block_size))
         self.W_V = nn.Parameter(torch.zeros(r, self.block_size, self.block_size))
@@ -47,8 +47,6 @@ class OFTCrossAttnProcessor(nn.Module):
         block_Q_Q = block_Q_Q * ((new_norm_Q_Q + 1e-8) / (norm_Q_Q + 1e-8))
         block_Q_K = block_Q_K * ((new_norm_Q_K + 1e-8) / (norm_Q_K + 1e-8))
         block_Q_V = block_Q_V * ((new_norm_Q_V + 1e-8) / (norm_Q_V + 1e-8))
-
-        print(f'scale {(new_norm_Q_Q + 1e-8) / (norm_Q_Q + 1e-8)}')
 
         I = torch.eye(self.block_size, device=key.device).unsqueeze(0).repeat(
             self.r, 1, 1

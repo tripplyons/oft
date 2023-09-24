@@ -1,0 +1,19 @@
+{
+    "examples": [
+        {
+            "path": "/path/to/photo 1.png",
+            "caption": "a photo of <SUBJECT> with a white background"
+        },
+        {
+            "path": "/path/to/photo 2.png",
+            "caption": "a close up photo of <SUBJECT>"
+        }
+    ],
+    "validation_prompt": "photo of <SUBJECT>",
+    "validation_negative_prompt": "blurry, low quality, low resolution",
+    "validation_cfg": 7,
+    "model_name": "runwayml/stable-diffusion-v1-5",
+    "num_train_epochs": 100,
+    "checkpointing_steps": 100,
+    "validation_epochs": 10
+}

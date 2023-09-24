@@ -33,16 +33,12 @@ adam_beta1 = 0.9
 adam_beta2 = 0.999
 adam_weight_decay = 0
 adam_epsilon = 1e-8
-cache_dir = 'cache'
 resolution = 512
 train_batch_size = 1
 dataloader_num_workers = 1
-num_train_epochs = 200
 max_grad_norm = 1.0
 lr_warmup_steps = 100
 lr_scheduler_type = 'constant'
-checkpointing_steps = 100
-validation_epochs = 20
 num_validation_images = 4
 resume_load_path = None
 use_8bit_optimizer = True
@@ -54,6 +50,9 @@ validation_prompt = config['validation_prompt']
 validation_negative_prompt = config['validation_negative_prompt']
 validation_cfg = config['validation_cfg']
 model_name = config['model_name']
+num_train_epochs = config['num_train_epochs']
+checkpointing_steps = config['checkpointing_steps']
+validation_epochs = config['validation_epochs']
 
 def main():
     accelerator = Accelerator(
