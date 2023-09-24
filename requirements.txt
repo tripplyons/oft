@@ -1,0 +1,7 @@
+accelerate==0.23.0
+diffusers==0.21.2
+huggingface-hub==0.17.2
+transformers==4.33.2
+bitsandbytes==0.41.1
+datasets==2.14.5
+scipy==1.11.2
